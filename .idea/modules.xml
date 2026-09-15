@@ -4,8 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Acceso_a_Datos.iml" filepath="$PROJECT_DIR$/.idea/Acceso_a_Datos.iml" />
       <module fileurl="file://$PROJECT_DIR$/Actividad3.2/Actividad3.2.iml" filepath="$PROJECT_DIR$/Actividad3.2/Actividad3.2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/actividad3/actividad3.iml" filepath="$PROJECT_DIR$/actividad3/actividad3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/actividad7/actividad3.iml" filepath="$PROJECT_DIR$/actividad7/actividad3.iml" />
       <module fileurl="file://$PROJECT_DIR$/actividad5/actividad5.iml" filepath="$PROJECT_DIR$/actividad5/actividad5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/actividad9/actividad9.iml" filepath="$PROJECT_DIR$/actividad9/actividad9.iml" />
       <module fileurl="file://$PROJECT_DIR$/untitled/untitled.iml" filepath="$PROJECT_DIR$/untitled/untitled.iml" />
     </modules>
   </component>
