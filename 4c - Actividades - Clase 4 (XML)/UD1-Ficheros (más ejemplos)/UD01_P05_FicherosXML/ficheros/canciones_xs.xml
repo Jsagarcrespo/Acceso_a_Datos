@@ -1,0 +1,44 @@
+<ListaCancionesXS>
+  <lista>
+    <DatosCancion>
+      <Id__cancion>2</Id__cancion>
+      <Año>2002</Año>
+      <titulo>Plug n baby</titulo>
+      <artista>Muse</artista>
+      <duracion>2:40</duracion>
+      <cancion__espanola>false</cancion__espanola>
+    </DatosCancion>
+    <DatosCancion>
+      <Id__cancion>2</Id__cancion>
+      <Año>2013</Año>
+      <titulo>R u mine</titulo>
+      <artista>Arctic Monkeys</artista>
+      <duracion>3:10</duracion>
+      <cancion__espanola>false</cancion__espanola>
+    </DatosCancion>
+    <DatosCancion>
+      <Id__cancion>3</Id__cancion>
+      <Año>2014</Año>
+      <titulo>Loose Sutures</titulo>
+      <artista>Fuzz</artista>
+      <duracion>4:30</duracion>
+      <cancion__espanola>false</cancion__espanola>
+    </DatosCancion>
+    <DatosCancion>
+      <Id__cancion>4</Id__cancion>
+      <Año>2018</Año>
+      <titulo>Total Football</titulo>
+      <artista>Parquet Courts</artista>
+      <duracion>3:00</duracion>
+      <cancion__espanola>false</cancion__espanola>
+    </DatosCancion>
+    <DatosCancion>
+      <Id__cancion>5</Id__cancion>
+      <Año>1973</Año>
+      <titulo>Entre dos aguas</titulo>
+      <artista>Paco de lucia</artista>
+      <duracion>6:00</duracion>
+      <cancion__espanola>true</cancion__espanola>
+    </DatosCancion>
+  </lista>
+</ListaCancionesXS>
