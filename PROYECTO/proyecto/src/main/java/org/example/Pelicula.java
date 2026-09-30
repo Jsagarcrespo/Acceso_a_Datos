@@ -1,8 +1,9 @@
 package org.example;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Pelicula {
+public class Pelicula implements Serializable {
 
     private String director;
     private String descripcion;
@@ -65,7 +66,7 @@ public class Pelicula {
     }
 
     public Usuario getUsuario() {
-        return usuario;
+        return this.usuario;
     }
 
 

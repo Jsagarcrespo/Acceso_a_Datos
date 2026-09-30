@@ -3,6 +3,7 @@ package org.example;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.util.List;
 
 public class CrearPelicula {
@@ -39,6 +40,19 @@ public class CrearPelicula {
                 for (Pelicula peli : peliculas){
                     System.out.println(peli.toString());
                 }
+
+
+                try {
+                    FileOutputStream fileout = new FileOutputStream("FicheroPelicula.dat");
+                    ObjectOutputStream dataOS = new ObjectOutputStream(fileout);
+
+                    dataOS.writeObject(peliculas);
+                    dataOS.close();
+
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+
 
                 tFtitulo.setText("");
                 tFDirector.setText("");

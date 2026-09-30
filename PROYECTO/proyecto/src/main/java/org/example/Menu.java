@@ -38,6 +38,24 @@ public class Menu extends Container {
 
             }
         });
+        ElPelicula.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Eliminar Pelicula");
+                frame.setContentPane(new EliminarPeli(peliculas).panelEliminarPeli);
+                frame.pack();
+                frame.setVisible(true);
+            }
+        });
+        ListPelicula.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Listar Pelicula");
+                frame.setContentPane(new ListarPeli(peliculas).ListarPeli);
+                frame.pack();
+                frame.setVisible(true);
+            }
+        });
     }
 
 
