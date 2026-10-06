@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class EditarPelicula {
     JPanel panelEditar;
@@ -20,44 +23,46 @@ public class EditarPelicula {
         DefaultListModel<Pelicula> peliculaDefaultListModel = new DefaultListModel<>();
         peliculaDefaultListModel.clear();
 
-        for (Pelicula peli : peliculas){
+        for (Pelicula peli : peliculas) {
             peliculaDefaultListModel.addElement(peli);
         }
 
         lisPelicula.setModel(peliculaDefaultListModel);
 
-            bEditar.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
+        bEditar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-                    Pelicula pelicula = lisPelicula.getSelectedValue();
+                Pelicula pelicula = lisPelicula.getSelectedValue();
 
-                    if (pelicula == null){
-                        JOptionPane.showMessageDialog(
-                                null,
-                                "Seleccione una pelicula"
-                        );
-                        return;
-                    }
-
-                    String titulo = String.valueOf(JTTitulo.getText());
-                    String director = String.valueOf(JTDirector.getText());
-                    String genero = String.valueOf(JTGenero.getText());
-
-                    int anio = Integer.parseInt(JTAns.getText());
-
-                    String descrip = String.valueOf(tADescripcion.getText());
-
-                    pelicula.setTitulo(titulo);
-                    pelicula.setDirector(director);
-                    pelicula.setGenero(genero);
-                    pelicula.setAnio(anio);
-                    pelicula.setDescripcion(descrip);
-
-                    lisPelicula.clearSelection();
-
+                if (pelicula == null) {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Seleccione una pelicula"
+                    );
+                    return;
                 }
-            });
+
+                String titulo = String.valueOf(JTTitulo.getText());
+                String director = String.valueOf(JTDirector.getText());
+                String genero = String.valueOf(JTGenero.getText());
+
+                int anio = Integer.parseInt(JTAns.getText());
+
+                String descrip = String.valueOf(tADescripcion.getText());
+
+                pelicula.setTitulo(titulo);
+                pelicula.setDirector(director);
+                pelicula.setGenero(genero);
+                pelicula.setAnio(anio);
+                pelicula.setDescripcion(descrip);
+
+                guardarPeliculas(peliculas);
+
+                lisPelicula.clearSelection();
+
+            }
+        });
 
         lisPelicula.addListSelectionListener(e -> {
 
@@ -80,7 +85,30 @@ public class EditarPelicula {
 
     }
 
+    private void guardarPeliculas(List<Pelicula> peliculas) {
 
+        try {
+
+            FileOutputStream fileout =
+                    new FileOutputStream("FicheroPelicula.dat");
+
+            ObjectOutputStream dataOS =
+                    new ObjectOutputStream(fileout);
+
+            dataOS.writeObject(peliculas);
+
+            dataOS.close();
+
+        } catch (IOException ex) {
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Error al guardar las películas: " + ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
 
 
 }
