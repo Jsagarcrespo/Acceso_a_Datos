@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class EliminarPeli {
     JPanel panelEliminarPeli;
@@ -34,9 +37,6 @@ public class EliminarPeli {
         tADescripcion.setText("");
         tADescripcion.setForeground(Color.WHITE);
         tADescripcion.setBackground(Color.DARK_GRAY);
-
-
-
 
 
         DefaultListModel<Pelicula> peliculaDefaultListModel = new DefaultListModel<>();
@@ -88,6 +88,8 @@ public class EliminarPeli {
 
                 peliculaDefaultListModel.remove(indice);
 
+                guardarPeliculas(peliculas);
+
                 JOptionPane.showMessageDialog(
                         null,
                         "Película eliminada correctamente"
@@ -96,7 +98,30 @@ public class EliminarPeli {
         });
     }
 
+    private void guardarPeliculas(List<Pelicula> peliculas) {
 
+        try {
+
+            FileOutputStream fileout =
+                    new FileOutputStream("FicheroPelicula.dat");
+
+            ObjectOutputStream dataOS =
+                    new ObjectOutputStream(fileout);
+
+            dataOS.writeObject(peliculas);
+
+            dataOS.close();
+
+        } catch (IOException ex) {
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Error al guardar las películas: " + ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
 
 
 }
