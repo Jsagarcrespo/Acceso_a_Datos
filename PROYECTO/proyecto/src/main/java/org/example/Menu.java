@@ -7,6 +7,16 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Menu extends Container {
     private JPanel menu;
     private JButton CrearPeli;
@@ -18,6 +28,9 @@ public class Menu extends Container {
     List<Usuario> usuario = new ArrayList<>();
 
     public Menu() {
+
+        cargarPeliculas();
+
         CrearPeli.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -58,6 +71,36 @@ public class Menu extends Container {
         });
     }
 
+    private void cargarPeliculas() {
+
+        try {
+
+            FileInputStream filein =
+                    new FileInputStream("FicheroPelicula.dat");
+
+            ObjectInputStream dataIS =
+                    new ObjectInputStream(filein);
+
+            peliculas = (List<Pelicula>) dataIS.readObject();
+
+            dataIS.close();
+
+        } catch (FileNotFoundException e) {
+
+            peliculas = new ArrayList<>();
+
+        } catch (IOException | ClassNotFoundException e) {
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Error al cargar las películas: " + e.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+
+            peliculas = new ArrayList<>();
+        }
+    }
 
     public JPanel getMenu() {
         return menu;

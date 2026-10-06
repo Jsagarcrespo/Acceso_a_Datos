@@ -71,7 +71,7 @@ public class Pelicula implements Serializable {
 
 
     public void setUsuario(Usuario usuario) {
-        usuario = usuario;
+        this.usuario = usuario;
     }
 
     @Override
