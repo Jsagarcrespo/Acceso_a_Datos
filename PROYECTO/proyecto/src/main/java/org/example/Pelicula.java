@@ -5,6 +5,9 @@ import java.util.List;
 
 public class Pelicula implements Serializable {
 
+    // Necesario para que lo podamos guardar el objeto en el .dat mas tarde
+    private static final long serialVersionUID = 1L;
+
     private String director;
     private String descripcion;
 

@@ -3,6 +3,8 @@ package org.example;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PagPrincipal {
     JPanel panel1;
@@ -11,6 +13,9 @@ public class PagPrincipal {
     private JTextField tFContra;
     private JButton Bentrar;
     private JLabel TFcontra;
+    private JButton bRegistrar;
+
+    List<Usuario> usuario = new ArrayList<>();
 
     public PagPrincipal() {
         Bentrar.addActionListener(new ActionListener() {
@@ -43,6 +48,15 @@ public class PagPrincipal {
                 }
             }
 
+        });
+        bRegistrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Listar Pelicula");
+                frame.setContentPane(new CrearUsuario(usuario).NUsuario);
+                frame.pack();
+                frame.setVisible(true);
+            }
         });
     }
 

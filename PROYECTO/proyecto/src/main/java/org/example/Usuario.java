@@ -1,20 +1,38 @@
 package org.example;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Usuario {
+public class Usuario implements Serializable {
 
-    private int id;
+    // Necesario para que lo podamos guardar el objeto en el .dat mas tarde
+    private static final long serialVersionUID = 1L;
+
+    private static int id;
     private String nombre;
 
-    public String getAlias() {
-        return alias;
+
+    public Usuario(String nombre, int tel, String passwd) {
+        this.id = id++;
+        this.nombre = nombre;
+        this.tel = tel;
+        this.passwd = passwd;
     }
 
-    public void setAlias(String alias) {
-        this.alias = alias;
+    private String passwd;
+    private int tel;
+
+    public int getTel() {
+        return tel;
     }
+
+    public void setTel(int tel) {
+        this.tel = tel;
+    }
+
+    private List<Pelicula> peliculas;
+
 
     public int getId() {
         return id;
@@ -33,19 +51,11 @@ public class Usuario {
     }
 
     public String getPassw() {
-        return passw;
+        return passwd;
     }
 
     public void setPassw(String passw) {
-        this.passw = passw;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
+        this.passwd = passw;
     }
 
     public List<Pelicula> getPelicula() {
@@ -56,23 +66,11 @@ public class Usuario {
         this.pelicula = pelicula;
     }
 
-    private String alias;
-    private String passw;
-
-    public Usuario(int id, String nombre, String alias, String passw, String tel) {
-        this.id = id;
-        this.nombre = nombre;
-        this.alias = alias;
-        this.passw = passw;
-        this.tel = tel;
-        pelicula = new ArrayList<Pelicula>();
-    }
-
-    private String tel;
-
     private List<Pelicula> pelicula;
 
 
-
-
+    @Override
+    public String toString() {
+        return " nombre='" + nombre + '\'' ;
+    }
 }

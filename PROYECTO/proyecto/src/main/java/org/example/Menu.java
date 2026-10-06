@@ -23,6 +23,7 @@ public class Menu extends Container {
     private JButton EdPelicula;
     private JButton ElPelicula;
     private JButton ListPelicula;
+    private JButton EdUsu;
 
     List<Pelicula> peliculas = new ArrayList<>();
     List<Usuario> usuario = new ArrayList<>();
@@ -65,6 +66,15 @@ public class Menu extends Container {
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Listar Pelicula");
                 frame.setContentPane(new ListarPeli(peliculas).ListarPeli);
+                frame.pack();
+                frame.setVisible(true);
+            }
+        });
+        EdUsu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Editar Pelicula");
+                frame.setContentPane(new EditarUsuario(usuario).EdUsuario);
                 frame.pack();
                 frame.setVisible(true);
             }
