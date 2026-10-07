@@ -22,9 +22,9 @@ public class Pelicula implements Serializable {
     private String genero;
     private int anio;
 
-
-
     private Usuario usuario;
+
+    private Valoracion valoracion;
 
     public Pelicula(String titulo, String director, String descripcion, String genero, int anio) {
         this.titulo = titulo;
@@ -72,9 +72,16 @@ public class Pelicula implements Serializable {
         return this.usuario;
     }
 
-
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Valoracion getValoracion() {
+        return valoracion;
+    }
+
+    public void setValoracion(Valoracion valoracion) {
+        this.valoracion = valoracion;
     }
 
     @Override

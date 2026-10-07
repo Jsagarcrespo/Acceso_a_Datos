@@ -17,6 +17,7 @@ public class Menu extends Container {
     private JButton EdUsu;
     private JButton bEliminarCuenta;
     private JButton bListaUsuarios;
+    private JButton bValorar;
 
     List<Pelicula> peliculas = new ArrayList<>();
     List<Usuario> usuario = new ArrayList<>();
@@ -104,6 +105,17 @@ public class Menu extends Container {
                 JFrame frame = new JFrame("Listar Usuarios");
                 frame.setContentPane(
                         new ListarUsu(usuario).ListarUsu
+                );
+                frame.pack();
+                frame.setVisible(true);
+            }
+        });
+        bValorar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Listar Usuarios");
+                frame.setContentPane(
+                        new ValorarPeli(peliculas, usuarioLogueado).panelValoracion
                 );
                 frame.pack();
                 frame.setVisible(true);

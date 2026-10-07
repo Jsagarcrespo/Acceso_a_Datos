@@ -46,6 +46,7 @@ public class ListarPeli {
 
                 xstream.alias("peliculas", List.class);
                 xstream.alias("pelicula", Pelicula.class);
+                xstream.alias("valoracion", Valoracion.class);
 
                 FileOutputStream fileout =
                         new FileOutputStream("FicheroPelicula.xml");
@@ -56,8 +57,7 @@ public class ListarPeli {
                                 StandardCharsets.UTF_8
                         );
 
-                PrettyPrintWriter prettyWriter =
-                        new PrettyPrintWriter(writer);
+                PrettyPrintWriter prettyWriter = new PrettyPrintWriter(writer);
 
                 xstream.marshal(peliculasUsuario, prettyWriter);
 

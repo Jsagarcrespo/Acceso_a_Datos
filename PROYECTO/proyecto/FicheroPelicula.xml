@@ -1,15 +1,27 @@
 <peliculas>
   <pelicula>
-    <director>jhhjhj</director>
-    <descripcion>hjgfjgffghj</descripcion>
-    <genero>jhjh</genero>
-    <anio>67676</anio>
+    <director>fd</director>
+    <descripcion>dfas</descripcion>
+    <genero>df</genero>
+    <anio>1</anio>
     <usuario>
-      <id>2</id>
-      <nombre>ss</nombre>
-      <passwd>ss</passwd>
-      <tel>22</tel>
+      <id>1</id>
+      <nombre>aa</nombre>
+      <passwd>aa</passwd>
+      <tel>11</tel>
     </usuario>
-    <titulo>jhhj</titulo>
+    <valoracion>
+      <puntuacion>5</puntuacion>
+      <comentario>Pues habra que verlo de nuevo o que pisha</comentario>
+    </valoracion>
+    <titulo>fd</titulo>
+  </pelicula>
+  <pelicula>
+    <director>gggg</director>
+    <descripcion>gfdsgfsfgdsg</descripcion>
+    <genero>ggggg</genero>
+    <anio>44445</anio>
+    <usuario reference="../../pelicula/usuario"/>
+    <titulo>ggggg</titulo>
   </pelicula>
 </peliculas>
