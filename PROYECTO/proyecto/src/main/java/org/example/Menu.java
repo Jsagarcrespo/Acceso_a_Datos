@@ -4,15 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +21,16 @@ public class Menu extends Container {
     private JButton ElPelicula;
     private JButton ListPelicula;
     private JButton EdUsu;
+    private JButton bEliminarCuenta;
+    private JButton bListaUsuarios;
 
     List<Pelicula> peliculas = new ArrayList<>();
     List<Usuario> usuario = new ArrayList<>();
 
-    public Menu() {
+    public Menu(Usuario usuarioLogueado) {
 
         cargarPeliculas();
+        cargarUsuarios();
 
         CrearPeli.addActionListener(new ActionListener() {
             @Override
@@ -73,8 +73,26 @@ public class Menu extends Container {
         EdUsu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame frame = new JFrame("Editar Pelicula");
+                JFrame frame = new JFrame("Editar Usuario");
                 frame.setContentPane(new EditarUsuario(usuario).EdUsuario);
+                frame.pack();
+                frame.setVisible(true);
+            }
+        });
+        bEliminarCuenta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Eliminar Usuarios");
+                frame.setContentPane(new EliminarUsu(usuarioLogueado, usuario).panelEliminarUsu);
+                frame.pack();
+                frame.setVisible(true);
+            }
+        });
+        bListaUsuarios.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Listar Usuarios");
+                frame.setContentPane(new ListarUsu(usuario).ListarUsu);
                 frame.pack();
                 frame.setVisible(true);
             }
@@ -109,6 +127,39 @@ public class Menu extends Container {
             );
 
             peliculas = new ArrayList<>();
+        }
+    }
+
+    private void cargarUsuarios() {
+
+        File archivo = new File("FicheroUsuario.dat");
+
+        if (!archivo.exists()) {
+            usuario = new ArrayList<>();
+            return;
+        }
+
+        try {
+            FileInputStream filein =
+                    new FileInputStream(archivo);
+
+            ObjectInputStream dataIS =
+                    new ObjectInputStream(filein);
+
+            usuario = (List<Usuario>) dataIS.readObject();
+
+            dataIS.close();
+
+        } catch (IOException | ClassNotFoundException ex) {
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Error al cargar los usuarios: " + ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+
+            usuario = new ArrayList<>();
         }
     }
 

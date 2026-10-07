@@ -3,10 +3,14 @@ package org.example;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PagPrincipal {
+
     JPanel panel1;
     private JPanel Jlog;
     private JTextField TFusu;
@@ -18,41 +22,87 @@ public class PagPrincipal {
     List<Usuario> usuario = new ArrayList<>();
 
     public PagPrincipal() {
+
+        cargarUsuarios();
+
         Bentrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String usuario = String.valueOf(TFusu.getText());
-                String usuar = "admin";
-                String contra = tFContra.getText();
-                String passwd = "admin";
 
-                if (usuario.isEmpty() || contra.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Te falta un area por rellenar", "Título", JOptionPane.ERROR_MESSAGE);
+                String usu = TFusu.getText();
+                String contra = tFContra.getText();
+
+                if (usu.isEmpty() || contra.isEmpty()) {
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Te falta un área por rellenar",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+
+                    return;
                 }
 
-                if (usuario.equals(usuar) && contra.equals(passwd)) {
-                    //JOptionPane.showMessageDialog(null, "Has introducido bien la contraseña", "Título", JOptionPane.INFORMATION_MESSAGE);
+                try {
 
-                    Menu m = new Menu();
+                    Usuario usuarioLogueado = null;
 
-                    JFrame frame = new JFrame("Menu");
-                    frame.setContentPane(m.getMenu());
-                    frame.pack();
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.setVisible(true);
-                    SwingUtilities.getWindowAncestor(Bentrar).dispose();
+                    for (Usuario usur : usuario) {
 
+                        if (usur.getNombre().equals(usu)
+                                && usur.getPassw().equals(contra)) {
 
-                } else {
-                    JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta", "Título", JOptionPane.ERROR_MESSAGE);
+                            usuarioLogueado = usur;
+                            break;
+                        }
+                    }
+
+                    if (usuarioLogueado != null) {
+
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Inicio de sesión correcto"
+                        );
+
+                        Menu m = new Menu(usuarioLogueado);
+                        JFrame frame = new JFrame("Menu");
+                        frame.setContentPane(m.getMenu());
+                        frame.pack();
+                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        frame.setVisible(true);
+
+                        SwingUtilities
+                                .getWindowAncestor(Bentrar)
+                                .dispose();
+
+                    } else {
+
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Usuario o contraseña incorrectos",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                    }
+
+                } catch (Exception ex) {
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Error al leer los usuarios: "
+                                    + ex.getMessage(),
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                    );
                 }
             }
-
         });
+
         bRegistrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame frame = new JFrame("Listar Pelicula");
+                JFrame frame = new JFrame("Registrar Usuario");
                 frame.setContentPane(new CrearUsuario(usuario).NUsuario);
                 frame.pack();
                 frame.setVisible(true);
@@ -60,19 +110,23 @@ public class PagPrincipal {
         });
     }
 
-   /* public static void main(String[] args) {
-        JFrame frame = new JFrame("PagPrincipal");
-        frame.setContentPane(new PagPrincipal().panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);    }*/
+    private void cargarUsuarios() {
 
-    /*public static void main(String[] args) {
-        JFrame frame = new JFrame("Login");
-        frame.setContentPane(new PagPrincipal().panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }*/
+        try {
 
+            FileInputStream filein =
+                    new FileInputStream("FicheroUsuario.dat");
+
+            ObjectInputStream dataIS =
+                    new ObjectInputStream(filein);
+
+            usuario = (List<Usuario>) dataIS.readObject();
+
+            dataIS.close();
+
+        } catch (IOException | ClassNotFoundException ex) {
+
+            usuario = new ArrayList<>();
+        }
+    }
 }

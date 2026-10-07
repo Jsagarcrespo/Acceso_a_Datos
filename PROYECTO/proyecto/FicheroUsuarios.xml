@@ -1,0 +1,14 @@
+<usuarios>
+  <usuario>
+    <id>2</id>
+    <nombre>aa</nombre>
+    <passwd>aa</passwd>
+    <tel>11</tel>
+  </usuario>
+  <usuario>
+    <id>3</id>
+    <nombre>ss</nombre>
+    <passwd>ss</passwd>
+    <tel>2222</tel>
+  </usuario>
+</usuarios>

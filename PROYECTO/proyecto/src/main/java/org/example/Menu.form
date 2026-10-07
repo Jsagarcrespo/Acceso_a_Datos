@@ -48,6 +48,22 @@
           <text value="Editar Usuario"/>
         </properties>
       </component>
+      <component id="a1fde" class="javax.swing.JButton" binding="bEliminarCuenta">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Eliminar Cuenta"/>
+        </properties>
+      </component>
+      <component id="b68fc" class="javax.swing.JButton" binding="bListaUsuarios">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Lista Usuarios"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

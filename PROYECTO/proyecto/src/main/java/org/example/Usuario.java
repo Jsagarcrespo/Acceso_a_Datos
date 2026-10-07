@@ -9,12 +9,12 @@ public class Usuario implements Serializable {
     // Necesario para que lo podamos guardar el objeto en el .dat mas tarde
     private static final long serialVersionUID = 1L;
 
-    private static int id;
+    private int id;
     private String nombre;
 
 
-    public Usuario(String nombre, int tel, String passwd) {
-        this.id = id++;
+    public Usuario(int id, String nombre, int tel, String passwd) {
+        this.id = id;
         this.nombre = nombre;
         this.tel = tel;
         this.passwd = passwd;

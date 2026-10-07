@@ -1,16 +1,13 @@
 package org.example;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
 public class EditarUsuario {
+
     JPanel EdUsuario;
     private JLabel JLTitulo;
     private JTextField tFNom;
@@ -19,12 +16,10 @@ public class EditarUsuario {
     private JButton Guardar;
     private JList<Usuario> listUsuario;
 
-
-
     public EditarUsuario(List<Usuario> usuarios) {
 
-        DefaultListModel<Usuario> usuarioDefaultListModel = new DefaultListModel<>();
-        usuarioDefaultListModel.clear();
+        DefaultListModel<Usuario> usuarioDefaultListModel =
+                new DefaultListModel<>();
 
         for (Usuario usu : usuarios) {
             usuarioDefaultListModel.addElement(usu);
@@ -32,54 +27,71 @@ public class EditarUsuario {
 
         listUsuario.setModel(usuarioDefaultListModel);
 
+        listUsuario.addListSelectionListener(e -> {
 
-        Guardar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+            if (!e.getValueIsAdjusting()) {
 
-                Usuario usuario = listUsuario.getSelectedValue();
+                Usuario usu = listUsuario.getSelectedValue();
 
-                if (usuario == null) {
+                if (usu != null) {
+                    tFNom.setText(usu.getNombre());
+                    tFPasswd.setText(usu.getPassw());
+                    tFTelefono.setText(String.valueOf(usu.getTel()));
+                }
+            }
+        });
+
+        Guardar.addActionListener(e -> {
+
+            Usuario usuario = listUsuario.getSelectedValue();
+
+            if (usuario == null) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Seleccione un usuario"
+                );
+                return;
+            }
+
+            try {
+
+                String nom = tFNom.getText().trim();
+                String passwd = tFPasswd.getText().trim();
+                int tel = Integer.parseInt(tFTelefono.getText().trim());
+
+                if (nom.isEmpty() || passwd.isEmpty()) {
                     JOptionPane.showMessageDialog(
                             null,
-                            "Seleccione una pelicula"
+                            "Rellena todos los campos",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
                     );
                     return;
                 }
-
-                String nom = String.valueOf(tFNom.getText());
-                int tel =  Integer.parseInt(tFTelefono.getText());
-                String passwd = String.valueOf(tFPasswd.getText());
-
 
                 usuario.setNombre(nom);
                 usuario.setTel(tel);
                 usuario.setPassw(passwd);
 
-
                 guardarUsuarios(usuarios);
 
-                listUsuario.clearSelection();
+                // Actualizar también el elemento mostrado en la JList
+                int indice = listUsuario.getSelectedIndex();
+                usuarioDefaultListModel.setElementAt(usuario, indice);
 
-            }
-        });
-        listUsuario.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Usuario modificado correctamente"
+                );
 
-                if (!e.getValueIsAdjusting()) {
+            } catch (NumberFormatException ex) {
 
-                    Usuario usu = listUsuario.getSelectedValue();
-
-                    if (usu != null) {
-                        tFNom.setText(usu.getNombre());
-                        tFPasswd.setText(usu.getPassw());
-                        tFTelefono.setText(String.valueOf(usu.getTel()));
-
-                    }
-                }
-
-
+                JOptionPane.showMessageDialog(
+                        null,
+                        "El teléfono debe ser un número",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
             }
         });
     }
@@ -89,7 +101,7 @@ public class EditarUsuario {
         try {
 
             FileOutputStream fileout =
-                    new FileOutputStream("FicheroPelicula.dat");
+                    new FileOutputStream("FicheroUsuario.dat");
 
             ObjectOutputStream dataOS =
                     new ObjectOutputStream(fileout);
@@ -102,11 +114,10 @@ public class EditarUsuario {
 
             JOptionPane.showMessageDialog(
                     null,
-                    "Error al guardar las películas: " + ex.getMessage(),
+                    "Error al guardar los usuarios: " + ex.getMessage(),
                     "Error",
                     JOptionPane.ERROR_MESSAGE
             );
         }
-
     }
 }

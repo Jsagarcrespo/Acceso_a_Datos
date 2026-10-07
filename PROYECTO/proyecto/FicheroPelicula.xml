@@ -1,1 +1,9 @@
-<?xml version="1.0" ?><peliculas><pelicula><director>1</director><descripcion>fadsa</descripcion><genero>1</genero><anio>1</anio><titulo>1</titulo></pelicula><pelicula><director>2</director><descripcion>fadsdfas</descripcion><genero>2</genero><anio>2</anio><titulo>2</titulo></pelicula><pelicula><director>3</director><descripcion>fdasfas</descripcion><genero>3</genero><anio>3</anio><titulo>3</titulo></pelicula><pelicula><director>2</director><descripcion>2</descripcion><genero>2</genero><anio>2</anio><titulo>2</titulo></pelicula><pelicula><director>3</director><descripcion>3</descripcion><genero>3</genero><anio>3</anio><titulo>3</titulo></pelicula></peliculas>
+<peliculas>
+  <pelicula>
+    <director>1</director>
+    <descripcion></descripcion>
+    <genero>1</genero>
+    <anio>1</anio>
+    <titulo>1</titulo>
+  </pelicula>
+</peliculas>
