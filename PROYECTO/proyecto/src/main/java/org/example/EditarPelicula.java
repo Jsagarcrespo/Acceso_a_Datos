@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 public class EditarPelicula {
+
     JPanel panelEditar;
     private JList<Pelicula> lisPelicula;
     private JButton bEditar;
@@ -18,13 +19,20 @@ public class EditarPelicula {
     private JTextField JTGenero;
     private JTextField JTDirector;
 
+    public EditarPelicula(List<Pelicula> peliculas, Usuario usuarioLogueado) {
 
-    public EditarPelicula(List<Pelicula> peliculas) {
-        DefaultListModel<Pelicula> peliculaDefaultListModel = new DefaultListModel<>();
+        DefaultListModel<Pelicula> peliculaDefaultListModel =
+                new DefaultListModel<>();
+
         peliculaDefaultListModel.clear();
 
         for (Pelicula peli : peliculas) {
-            peliculaDefaultListModel.addElement(peli);
+
+            if (peli.getUsuario() != null
+                    && peli.getUsuario().getId() == usuarioLogueado.getId()) {
+
+                peliculaDefaultListModel.addElement(peli);
+            }
         }
 
         lisPelicula.setModel(peliculaDefaultListModel);
@@ -36,31 +44,50 @@ public class EditarPelicula {
                 Pelicula pelicula = lisPelicula.getSelectedValue();
 
                 if (pelicula == null) {
+
                     JOptionPane.showMessageDialog(
                             null,
                             "Seleccione una pelicula"
                     );
+
                     return;
                 }
 
-                String titulo = String.valueOf(JTTitulo.getText());
-                String director = String.valueOf(JTDirector.getText());
-                String genero = String.valueOf(JTGenero.getText());
+                try {
 
-                int anio = Integer.parseInt(JTAns.getText());
+                    String titulo = String.valueOf(JTTitulo.getText()).trim();
+                    String director = String.valueOf(JTDirector.getText()).trim();
+                    String genero = String.valueOf(JTGenero.getText()).trim();
 
-                String descrip = String.valueOf(tADescripcion.getText());
+                    int anio = Integer.parseInt(JTAns.getText().trim());
 
-                pelicula.setTitulo(titulo);
-                pelicula.setDirector(director);
-                pelicula.setGenero(genero);
-                pelicula.setAnio(anio);
-                pelicula.setDescripcion(descrip);
+                    String descrip =
+                            String.valueOf(tADescripcion.getText()).trim();
 
-                guardarPeliculas(peliculas);
+                    pelicula.setTitulo(titulo);
+                    pelicula.setDirector(director);
+                    pelicula.setGenero(genero);
+                    pelicula.setAnio(anio);
+                    pelicula.setDescripcion(descrip);
 
-                lisPelicula.clearSelection();
+                    guardarPeliculas(peliculas);
 
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Película modificada correctamente"
+                    );
+
+                    lisPelicula.clearSelection();
+
+                } catch (NumberFormatException ex) {
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "El año debe ser un número",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                }
             }
         });
 
@@ -71,18 +98,15 @@ public class EditarPelicula {
                 Pelicula peli = lisPelicula.getSelectedValue();
 
                 if (peli != null) {
+
                     JTTitulo.setText(peli.getTitulo());
                     JTDirector.setText(peli.getDirector());
                     JTGenero.setText(peli.getGenero());
                     JTAns.setText(String.valueOf(peli.getAnio()));
-
                     tADescripcion.setText(peli.getDescripcion());
-
                 }
             }
         });
-
-
     }
 
     private void guardarPeliculas(List<Pelicula> peliculas) {
@@ -109,6 +133,4 @@ public class EditarPelicula {
             );
         }
     }
-
-
 }

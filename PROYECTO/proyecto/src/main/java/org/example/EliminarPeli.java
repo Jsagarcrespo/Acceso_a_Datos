@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 public class EliminarPeli {
+
     JPanel panelEliminarPeli;
     private JPanel panelPrincipal;
     private JList<Pelicula> listPeli;
@@ -26,8 +27,7 @@ public class EliminarPeli {
     private JTextArea tADescripcion;
     private JButton bEliminar;
 
-    public EliminarPeli(List<Pelicula> peliculas) {
-
+    public EliminarPeli(List<Pelicula> peliculas, Usuario usuarioLogueado) {
 
         JLtit.setText("");
         JLdir.setText("");
@@ -38,12 +38,18 @@ public class EliminarPeli {
         tADescripcion.setForeground(Color.WHITE);
         tADescripcion.setBackground(Color.DARK_GRAY);
 
+        DefaultListModel<Pelicula> peliculaDefaultListModel =
+                new DefaultListModel<>();
 
-        DefaultListModel<Pelicula> peliculaDefaultListModel = new DefaultListModel<>();
         peliculaDefaultListModel.clear();
 
-        for (Pelicula peli : peliculas){
-            peliculaDefaultListModel.addElement(peli);
+        for (Pelicula peli : peliculas) {
+
+            if (peli.getUsuario() != null
+                    && peli.getUsuario().getId() == usuarioLogueado.getId()) {
+
+                peliculaDefaultListModel.addElement(peli);
+            }
         }
 
         listPeli.setModel(peliculaDefaultListModel);
@@ -51,44 +57,62 @@ public class EliminarPeli {
         listPeli.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
+
                 if (!e.getValueIsAdjusting()) {
 
                     Pelicula peli = listPeli.getSelectedValue();
 
                     if (peli != null) {
+
                         JLtit.setText(peli.getTitulo());
                         JLdir.setText(peli.getDirector());
                         JLgen.setText(peli.getGenero());
                         JLans.setText(String.valueOf(peli.getAnio()));
 
                         tADescripcion.setText(peli.getDescripcion());
-
                     }
                 }
             }
         });
 
-
         bEliminar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 Pelicula pelicula = listPeli.getSelectedValue();
 
-                if (pelicula == null){
+                if (pelicula == null) {
+
                     JOptionPane.showMessageDialog(
                             null,
                             "Seleccione una pelicula"
                     );
+
                     return;
                 }
 
-                int indice = listPeli.getSelectedIndex();
+                int opcion = JOptionPane.showConfirmDialog(
+                        null,
+                        "¿Seguro que quieres eliminar esta película?",
+                        "Confirmar eliminación",
+                        JOptionPane.YES_NO_OPTION
+                );
 
-                peliculas.remove(indice);
+                if (opcion != JOptionPane.YES_OPTION) {
+                    return;
+                }
 
-                peliculaDefaultListModel.remove(indice);
+                peliculas.remove(pelicula);
+
+                peliculaDefaultListModel.removeElement(pelicula);
 
                 guardarPeliculas(peliculas);
+
+                JLtit.setText("");
+                JLdir.setText("");
+                JLgen.setText("");
+                JLans.setText("");
+                tADescripcion.setText("");
 
                 JOptionPane.showMessageDialog(
                         null,
@@ -122,6 +146,4 @@ public class EliminarPeli {
             );
         }
     }
-
-
 }

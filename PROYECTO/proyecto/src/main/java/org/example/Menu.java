@@ -8,12 +8,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class Menu extends Container {
     private JPanel menu;
     private JButton CrearPeli;
@@ -36,63 +30,81 @@ public class Menu extends Container {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Crear pelicula");
-                frame.setContentPane(new CrearPelicula(peliculas).NPelicula);
+                frame.setContentPane(
+                        new CrearPelicula(peliculas, usuarioLogueado).NPelicula
+                );
                 frame.pack();
                 frame.setVisible(true);
             }
         });
+
         EdPelicula.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                    JFrame frame = new JFrame("EditarPelicula");
-                    frame.setContentPane(new EditarPelicula(peliculas).panelEditar);
-                    frame.pack();
-                    frame.setVisible(true);
-
+                JFrame frame = new JFrame("EditarPelicula");
+                frame.setContentPane(
+                        new EditarPelicula(peliculas, usuarioLogueado).panelEditar
+                );
+                frame.pack();
+                frame.setVisible(true);
             }
         });
+
         ElPelicula.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Eliminar Pelicula");
-                frame.setContentPane(new EliminarPeli(peliculas).panelEliminarPeli);
+                frame.setContentPane(
+                        new EliminarPeli(peliculas, usuarioLogueado).panelEliminarPeli
+                );
                 frame.pack();
                 frame.setVisible(true);
             }
         });
+
         ListPelicula.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Listar Pelicula");
-                frame.setContentPane(new ListarPeli(peliculas).ListarPeli);
+                frame.setContentPane(
+                        new ListarPeli(peliculas, usuarioLogueado).ListarPeli
+                );
                 frame.pack();
                 frame.setVisible(true);
             }
         });
+
         EdUsu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Editar Usuario");
-                frame.setContentPane(new EditarUsuario(usuario).EdUsuario);
+                frame.setContentPane(
+                        new EditarUsuario(usuario).EdUsuario
+                );
                 frame.pack();
                 frame.setVisible(true);
             }
         });
+
         bEliminarCuenta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Eliminar Usuarios");
-                frame.setContentPane(new EliminarUsu(usuarioLogueado, usuario).panelEliminarUsu);
+                frame.setContentPane(
+                        new EliminarUsu(usuarioLogueado, usuario).panelEliminarUsu
+                );
                 frame.pack();
                 frame.setVisible(true);
             }
         });
+
         bListaUsuarios.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Listar Usuarios");
-                frame.setContentPane(new ListarUsu(usuario).ListarUsu);
+                frame.setContentPane(
+                        new ListarUsu(usuario).ListarUsu
+                );
                 frame.pack();
                 frame.setVisible(true);
             }
@@ -140,6 +152,7 @@ public class Menu extends Container {
         }
 
         try {
+
             FileInputStream filein =
                     new FileInputStream(archivo);
 
@@ -166,5 +179,4 @@ public class Menu extends Container {
     public JPanel getMenu() {
         return menu;
     }
-
 }

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListarPeli {
@@ -18,13 +19,21 @@ public class ListarPeli {
     private JList<Pelicula> listPeli;
     private JButton bXML;
 
-    public ListarPeli(List<Pelicula> peliculas) {
+    public ListarPeli(List<Pelicula> peliculas, Usuario usuarioLogueado) {
 
         DefaultListModel<Pelicula> peliculaDefaultListModel =
                 new DefaultListModel<>();
 
+        List<Pelicula> peliculasUsuario = new ArrayList<>();
+
         for (Pelicula peli : peliculas) {
-            peliculaDefaultListModel.addElement(peli);
+
+            if (peli.getUsuario() != null
+                    && peli.getUsuario().getId() == usuarioLogueado.getId()) {
+
+                peliculasUsuario.add(peli);
+                peliculaDefaultListModel.addElement(peli);
+            }
         }
 
         listPeli.setModel(peliculaDefaultListModel);
@@ -35,32 +44,23 @@ public class ListarPeli {
 
                 XStream xstream = new XStream(new StaxDriver());
 
-                // Nombre que tendrá la lista en el XML
                 xstream.alias("peliculas", List.class);
-
-                // Nombre que tendrá cada película
                 xstream.alias("pelicula", Pelicula.class);
 
-                // Creamos el fichero
                 FileOutputStream fileout =
                         new FileOutputStream("FicheroPelicula.xml");
 
-                // Writer para escribir el XML
                 Writer writer =
                         new OutputStreamWriter(
                                 fileout,
                                 StandardCharsets.UTF_8
                         );
 
-                // PrettyPrintWriter permite escribir el XML
-                // con saltos de línea e indentación
                 PrettyPrintWriter prettyWriter =
                         new PrettyPrintWriter(writer);
 
-                // Convertimos la lista a XML
-                xstream.marshal(peliculas, prettyWriter);
+                xstream.marshal(peliculasUsuario, prettyWriter);
 
-                // Cerramos el writer
                 prettyWriter.close();
 
                 JOptionPane.showMessageDialog(

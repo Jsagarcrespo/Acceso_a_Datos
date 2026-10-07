@@ -1,9 +1,15 @@
 <peliculas>
   <pelicula>
-    <director>1</director>
-    <descripcion></descripcion>
-    <genero>1</genero>
-    <anio>1</anio>
-    <titulo>1</titulo>
+    <director>jhhjhj</director>
+    <descripcion>hjgfjgffghj</descripcion>
+    <genero>jhjh</genero>
+    <anio>67676</anio>
+    <usuario>
+      <id>2</id>
+      <nombre>ss</nombre>
+      <passwd>ss</passwd>
+      <tel>22</tel>
+    </usuario>
+    <titulo>jhhj</titulo>
   </pelicula>
 </peliculas>

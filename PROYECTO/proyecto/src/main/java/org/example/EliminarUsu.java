@@ -4,9 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.List;
 
 public class EliminarUsu {
@@ -41,6 +39,12 @@ public class EliminarUsu {
 
                 if (opcion == JOptionPane.YES_OPTION) {
 
+                    // Primero eliminamos las películas de este usuario
+                    if (!eliminarPeliculasUsuario(usuario)) {
+                        return;
+                    }
+
+                    // Después eliminamos el usuario
                     for (int i = 0; i < usuarios.size(); i++) {
 
                         if (usuarios.get(i).getId() == usuario.getId()) {
@@ -69,6 +73,62 @@ public class EliminarUsu {
                 }
             }
         });
+    }
+
+    private boolean eliminarPeliculasUsuario(Usuario usuario) {
+
+        File archivo = new File("FicheroPelicula.dat");
+
+        if (!archivo.exists()) {
+            return true;
+        }
+
+        try {
+
+            FileInputStream filein =
+                    new FileInputStream(archivo);
+
+            ObjectInputStream dataIS =
+                    new ObjectInputStream(filein);
+
+            List<Pelicula> peliculas =
+                    (List<Pelicula>) dataIS.readObject();
+
+            dataIS.close();
+
+            for (int i = peliculas.size() - 1; i >= 0; i--) {
+
+                Pelicula pelicula = peliculas.get(i);
+
+                if (pelicula.getUsuario() != null
+                        && pelicula.getUsuario().getId() == usuario.getId()) {
+
+                    peliculas.remove(i);
+                }
+            }
+
+            FileOutputStream fileout =
+                    new FileOutputStream("FicheroPelicula.dat");
+
+            ObjectOutputStream dataOS =
+                    new ObjectOutputStream(fileout);
+
+            dataOS.writeObject(peliculas);
+            dataOS.close();
+
+            return true;
+
+        } catch (IOException | ClassNotFoundException ex) {
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Error al eliminar las películas del usuario: " + ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+
+            return false;
+        }
     }
 
     private boolean guardarUsuarios(List<Usuario> usuarios) {
