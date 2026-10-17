@@ -6,6 +6,7 @@ import org.example.models.Usuario;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -114,11 +115,19 @@ public class PagPrincipal {
     }
 
     private void cargarUsuarios() {
+        File archivo = new File(
+                "ficherosDat",
+                "FicheroUsuarios.dat"
+        );
 
+        if (!archivo.exists()) {
+            usuario = new ArrayList<>();
+            return;
+        }
         try {
 
             FileInputStream filein =
-                    new FileInputStream("FicheroUsuario.dat");
+                    new FileInputStream(archivo);
 
             ObjectInputStream dataIS =
                     new ObjectInputStream(filein);

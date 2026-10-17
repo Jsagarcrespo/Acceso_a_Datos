@@ -68,8 +68,17 @@ public class CrearPelicula {
                         System.out.println(peli.toString());
                     }
 
+                    File directorio = new File("ficherosDat");
+
+                    if (!directorio.exists()) {
+                        directorio.mkdirs();
+                    }
+
                     FileOutputStream fileout =
-                            new FileOutputStream("FicheroPelicula.dat");
+                            new FileOutputStream( new File(directorio,
+                                    "FicheroPelicula.dat")
+                            );
+
 
                     ObjectOutputStream dataOS =
                             new ObjectOutputStream(fileout);

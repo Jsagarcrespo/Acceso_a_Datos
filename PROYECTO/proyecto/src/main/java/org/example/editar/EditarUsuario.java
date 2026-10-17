@@ -3,6 +3,7 @@ package org.example.editar;
 import org.example.models.Usuario;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -28,6 +29,15 @@ public class EditarUsuario {
         }
 
         listUsuario.setModel(usuarioDefaultListModel);
+
+        System.out.println(
+                "Usuarios en la lista visual: "
+                        + usuarioDefaultListModel.getSize()
+        );
+
+        System.out.println(
+                "Modelo asociado: " + listUsuario.getModel().getSize()
+        );
 
         listUsuario.addListSelectionListener(e -> {
 
@@ -102,8 +112,16 @@ public class EditarUsuario {
 
         try {
 
+            File directorio = new File("ficherosDat");
+
+            if (!directorio.exists()) {
+                directorio.mkdirs();
+            }
+
             FileOutputStream fileout =
-                    new FileOutputStream("FicheroUsuario.dat");
+                    new FileOutputStream( new File(directorio,
+                            "FicheroUsuarios.dat")
+                    );
 
             ObjectOutputStream dataOS =
                     new ObjectOutputStream(fileout);

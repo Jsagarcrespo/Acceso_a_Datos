@@ -22,6 +22,9 @@ public class Usuario implements Serializable {
     private String passwd;
     private int tel;
 
+    public Usuario(Usuario usu) {
+    }
+
     public int getTel() {
         return tel;
     }

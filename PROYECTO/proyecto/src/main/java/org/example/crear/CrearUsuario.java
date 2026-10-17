@@ -3,6 +3,7 @@ package org.example.crear;
 import org.example.models.Usuario;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -80,8 +81,16 @@ public class CrearUsuario {
 
         try {
 
+            File directorio = new File("ficherosDat");
+
+            if (!directorio.exists()) {
+                directorio.mkdirs();
+            }
+
             FileOutputStream fileout =
-                    new FileOutputStream("FicheroUsuario.dat");
+                    new FileOutputStream( new File(directorio,
+                            "FicheroUsuarios.dat")
+                    );
 
             ObjectOutputStream dataOS =
                     new ObjectOutputStream(fileout);

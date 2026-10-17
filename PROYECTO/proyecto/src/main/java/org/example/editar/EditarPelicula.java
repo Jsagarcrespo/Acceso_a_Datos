@@ -6,6 +6,7 @@ import org.example.models.Usuario;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.List;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -116,8 +117,16 @@ public class EditarPelicula {
 
         try {
 
+            File directorio = new File("ficherosDat");
+
+            if (!directorio.exists()) {
+                directorio.mkdirs();
+            }
+
             FileOutputStream fileout =
-                    new FileOutputStream("FicheroPelicula.dat");
+                    new FileOutputStream( new File(directorio,
+                            "FicheroPelicula.dat")
+                    );
 
             ObjectOutputStream dataOS =
                     new ObjectOutputStream(fileout);
