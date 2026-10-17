@@ -1,4 +1,8 @@
-package org.example;
+package org.example.editar;
+
+import org.example.models.Pelicula;
+import org.example.models.Usuario;
+import org.example.models.Valoracion;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -8,15 +12,16 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
-public class ValorarPeli {
-    JPanel panelValoracion;
+public class EditarValoracion {
+    public JPanel panelValoracion;
     private JLabel JLTitulo;
     private JTextField tFPuntuacion;
     private JButton bGuardar;
     private JList<Pelicula> listPelicula;
     private JTextArea tAComentario;
 
-    public ValorarPeli(List<Pelicula> peliculas, Usuario usuarioLogueado) {
+    public EditarValoracion(List<Pelicula> peliculas, Usuario usuarioLogueado) {
+
         DefaultListModel<Pelicula> peliculaDefaultListModel =
                 new DefaultListModel<>();
 
@@ -65,9 +70,12 @@ public class ValorarPeli {
             }
         });
 
+
+
         bGuardar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
 
                 Pelicula peliculaSeleccionada =
                         listPelicula.getSelectedValue();
@@ -124,6 +132,7 @@ public class ValorarPeli {
                 }
             }
         });
+        
     }
 
     private void guardarPeliculas(List<Pelicula> peliculas) {
@@ -150,4 +159,5 @@ public class ValorarPeli {
             );
         }
     }
+    
 }

@@ -1,4 +1,8 @@
-package org.example;
+package org.example.eliminar;
+
+import org.example.menu.PagPrincipal;
+import org.example.models.Pelicula;
+import org.example.models.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +13,7 @@ import java.util.List;
 
 public class EliminarUsu {
 
-    JPanel panelEliminarUsu;
+    public JPanel panelEliminarUsu;
     private JButton bEliminar;
     private JPanel panelPrincipal;
     private JLabel JLnom;

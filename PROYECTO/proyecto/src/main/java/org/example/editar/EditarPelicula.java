@@ -1,4 +1,7 @@
-package org.example;
+package org.example.editar;
+
+import org.example.models.Pelicula;
+import org.example.models.Usuario;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +13,7 @@ import java.io.ObjectOutputStream;
 
 public class EditarPelicula {
 
-    JPanel panelEditar;
+    public JPanel panelEditar;
     private JList<Pelicula> lisPelicula;
     private JButton bEditar;
     private JTextField JTTitulo;

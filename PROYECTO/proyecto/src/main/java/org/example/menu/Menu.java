@@ -1,4 +1,17 @@
-package org.example;
+package org.example.menu;
+
+import org.example.crear.CrearValoracion;
+import org.example.crear.CrearPelicula;
+import org.example.editar.EditarPelicula;
+import org.example.editar.EditarUsuario;
+import org.example.editar.EditarValoracion;
+import org.example.eliminar.EliminarPeli;
+import org.example.eliminar.EliminarUsu;
+import org.example.eliminar.EliminarValor;
+import org.example.listar.ListarPeli;
+import org.example.listar.ListarUsu;
+import org.example.models.Pelicula;
+import org.example.models.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +30,9 @@ public class Menu extends Container {
     private JButton EdUsu;
     private JButton bEliminarCuenta;
     private JButton bListaUsuarios;
-    private JButton bValorar;
+    private JButton bEditValoracion;
+    private JButton bCrearValoracion;
+    private JButton bEliValor;
 
     List<Pelicula> peliculas = new ArrayList<>();
     List<Usuario> usuario = new ArrayList<>();
@@ -110,12 +125,34 @@ public class Menu extends Container {
                 frame.setVisible(true);
             }
         });
-        bValorar.addActionListener(new ActionListener() {
+        bEditValoracion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame frame = new JFrame("Listar Usuarios");
+                JFrame frame = new JFrame("Editar Valoracion");
                 frame.setContentPane(
-                        new ValorarPeli(peliculas, usuarioLogueado).panelValoracion
+                        new EditarValoracion(peliculas, usuarioLogueado).panelValoracion
+                );
+                frame.pack();
+                frame.setVisible(true);
+            }
+        });
+        bCrearValoracion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Crear Valoracion");
+                frame.setContentPane(
+                        new CrearValoracion(peliculas, usuarioLogueado).panelValoracion
+                );
+                frame.pack();
+                frame.setVisible(true);
+            }
+        });
+        bEliValor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Crear Valoracion");
+                frame.setContentPane(
+                        new EliminarValor(peliculas, usuarioLogueado).panelEliminarValor
                 );
                 frame.pack();
                 frame.setVisible(true);

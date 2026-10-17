@@ -1,8 +1,11 @@
-package org.example;
+package org.example.listar;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
+import org.example.models.Pelicula;
+import org.example.models.Usuario;
+import org.example.models.Valoracion;
 
 import javax.swing.*;
 import java.io.FileOutputStream;
@@ -15,7 +18,7 @@ import java.util.List;
 
 public class ListarPeli {
 
-    JPanel ListarPeli;
+    public JPanel ListarPeli;
     private JList<Pelicula> listPeli;
     private JButton bXML;
 

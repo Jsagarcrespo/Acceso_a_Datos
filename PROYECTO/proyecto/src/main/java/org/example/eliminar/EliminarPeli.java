@@ -1,4 +1,7 @@
-package org.example;
+package org.example.eliminar;
+
+import org.example.models.Pelicula;
+import org.example.models.Usuario;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -13,7 +16,7 @@ import java.io.ObjectOutputStream;
 
 public class EliminarPeli {
 
-    JPanel panelEliminarPeli;
+    public JPanel panelEliminarPeli;
     private JPanel panelPrincipal;
     private JList<Pelicula> listPeli;
     private JLabel JLtit;

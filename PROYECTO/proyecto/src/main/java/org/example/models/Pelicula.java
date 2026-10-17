@@ -1,7 +1,6 @@
-package org.example;
+package org.example.models;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Pelicula implements Serializable {
 

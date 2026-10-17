@@ -1,4 +1,7 @@
-package org.example;
+package org.example.menu;
+
+import org.example.crear.CrearUsuario;
+import org.example.models.Usuario;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +14,7 @@ import java.util.List;
 
 public class PagPrincipal {
 
-    JPanel panel1;
+    public JPanel panel1;
     private JPanel Jlog;
     private JTextField TFusu;
     private JTextField tFContra;

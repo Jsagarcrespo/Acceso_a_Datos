@@ -1,4 +1,7 @@
-package org.example;
+package org.example.crear;
+
+import org.example.models.Pelicula;
+import org.example.models.Usuario;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +16,7 @@ public class CrearPelicula {
     private JTextArea tADescripcion;
     private JButton Guardar;
     private JLabel JLTitulo;
-    JPanel NPelicula;
+    public JPanel NPelicula;
     private JTextField tFAnio;
 
     int contPeli = 0;

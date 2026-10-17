@@ -1,8 +1,9 @@
-package org.example;
+package org.example.listar;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
+import org.example.models.Usuario;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class ListarUsu {
-    JPanel ListarUsu;
+    public JPanel ListarUsu;
     private JList listUsu;
     private JButton bXML;
 

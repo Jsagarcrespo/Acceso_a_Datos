@@ -1,4 +1,6 @@
-package org.example;
+package org.example.editar;
+
+import org.example.models.Usuario;
 
 import javax.swing.*;
 import java.io.FileOutputStream;
@@ -6,27 +8,60 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
-public class CrearUsuario {
+public class EditarUsuario {
 
-    JPanel NUsuario;
+    public JPanel EdUsuario;
     private JLabel JLTitulo;
     private JTextField tFNom;
     private JTextField tFPasswd;
     private JTextField tFTelefono;
     private JButton Guardar;
+    private JList<Usuario> listUsuario;
 
+    public EditarUsuario(List<Usuario> usuarios) {
 
-    public CrearUsuario(List<Usuario> usuarios) {
+        DefaultListModel<Usuario> usuarioDefaultListModel =
+                new DefaultListModel<>();
+
+        for (Usuario usu : usuarios) {
+            usuarioDefaultListModel.addElement(usu);
+        }
+
+        listUsuario.setModel(usuarioDefaultListModel);
+
+        listUsuario.addListSelectionListener(e -> {
+
+            if (!e.getValueIsAdjusting()) {
+
+                Usuario usu = listUsuario.getSelectedValue();
+
+                if (usu != null) {
+                    tFNom.setText(usu.getNombre());
+                    tFPasswd.setText(usu.getPassw());
+                    tFTelefono.setText(String.valueOf(usu.getTel()));
+                }
+            }
+        });
 
         Guardar.addActionListener(e -> {
 
+            Usuario usuario = listUsuario.getSelectedValue();
+
+            if (usuario == null) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Seleccione un usuario"
+                );
+                return;
+            }
+
             try {
 
-                String nombre = tFNom.getText().trim();
+                String nom = tFNom.getText().trim();
                 String passwd = tFPasswd.getText().trim();
                 int tel = Integer.parseInt(tFTelefono.getText().trim());
 
-                if (nombre.isEmpty() || passwd.isEmpty()) {
+                if (nom.isEmpty() || passwd.isEmpty()) {
                     JOptionPane.showMessageDialog(
                             null,
                             "Rellena todos los campos",
@@ -36,31 +71,20 @@ public class CrearUsuario {
                     return;
                 }
 
-                int id = 0;
-
-                for (Usuario usu : usuarios) {
-                    if (usu.getId() > id) {
-                        id = usu.getId();
-                    }
-                }
-
-                id++;
-
-
-                Usuario usuario = new Usuario(id,nombre, tel, passwd);
-
-                usuarios.add(usuario);
+                usuario.setNombre(nom);
+                usuario.setTel(tel);
+                usuario.setPassw(passwd);
 
                 guardarUsuarios(usuarios);
 
+                // Actualizar también el elemento mostrado en la JList
+                int indice = listUsuario.getSelectedIndex();
+                usuarioDefaultListModel.setElementAt(usuario, indice);
+
                 JOptionPane.showMessageDialog(
                         null,
-                        "Usuario creado correctamente"
+                        "Usuario modificado correctamente"
                 );
-
-                tFNom.setText("");
-                tFTelefono.setText("");
-                tFPasswd.setText("");
 
             } catch (NumberFormatException ex) {
 

@@ -1,27 +1,43 @@
 <peliculas>
   <pelicula>
-    <director>fd</director>
-    <descripcion>dfas</descripcion>
-    <genero>df</genero>
-    <anio>1</anio>
+    <director>dfas</director>
+    <descripcion>fdassfasafdfas</descripcion>
+    <genero>dfsa</genero>
+    <anio>22</anio>
     <usuario>
-      <id>1</id>
-      <nombre>aa</nombre>
-      <passwd>aa</passwd>
-      <tel>11</tel>
+      <id>2</id>
+      <nombre>misha</nombre>
+      <passwd>misha</passwd>
+      <tel>121221</tel>
     </usuario>
     <valoracion>
-      <puntuacion>5</puntuacion>
-      <comentario>Pues habra que verlo de nuevo o que pisha</comentario>
+      <puntuacion>7</puntuacion>
+      <comentario>poiuipuopiuopi</comentario>
     </valoracion>
-    <titulo>fd</titulo>
+    <titulo>asdf</titulo>
   </pelicula>
   <pelicula>
-    <director>gggg</director>
-    <descripcion>gfdsgfsfgdsg</descripcion>
-    <genero>ggggg</genero>
-    <anio>44445</anio>
+    <director>poiiopopi</director>
+    <descripcion>opiuouipuoip</descripcion>
+    <genero>ioppio</genero>
+    <anio>77</anio>
     <usuario reference="../../pelicula/usuario"/>
-    <titulo>ggggg</titulo>
+    <titulo>iopiop</titulo>
+  </pelicula>
+  <pelicula>
+    <director>nose</director>
+    <descripcion>ljdfsljdfasjldfsljkasdf</descripcion>
+    <genero>nose</genero>
+    <anio>33</anio>
+    <usuario reference="../../pelicula/usuario"/>
+    <titulo>papa noel</titulo>
+  </pelicula>
+  <pelicula>
+    <director>dios</director>
+    <descripcion>fdasjkljadfklsjladsfljkdasf</descripcion>
+    <genero>ficcion</genero>
+    <anio>1</anio>
+    <usuario reference="../../pelicula/usuario"/>
+    <titulo>jesucrito star</titulo>
   </pelicula>
 </peliculas>
